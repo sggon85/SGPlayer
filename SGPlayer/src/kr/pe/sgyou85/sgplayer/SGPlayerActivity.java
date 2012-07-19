@@ -1,5 +1,8 @@
 package kr.pe.sgyou85.sgplayer;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import android.app.Activity;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnBufferingUpdateListener;
@@ -13,6 +16,8 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
+import android.widget.SeekBar.OnSeekBarChangeListener;
+import android.widget.TextView;
 
 public class SGPlayerActivity extends Activity {
 	
@@ -21,6 +26,7 @@ public class SGPlayerActivity extends Activity {
 	private TimerTicker timer = null;
 	private LinearLayout llContainer = null;
 	private SeekBar sbProgress = null;
+	private TextView tvProgressTime = null;
 	
     /** Called when the activity is first created. */
     @Override
@@ -30,6 +36,7 @@ public class SGPlayerActivity extends Activity {
         
         this.llContainer = (LinearLayout)this.findViewById(R.id.m_llContainer);
         this.sbProgress = (SeekBar)this.findViewById(R.id.m_sbProgress);
+        this.tvProgressTime = (TextView)this.findViewById(R.id.m_tvProgressTime);
         
         this.timer = new TimerTicker();
         
@@ -51,6 +58,21 @@ public class SGPlayerActivity extends Activity {
 				stop();
 			}
     	});
+    	
+    	this.sbProgress.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+			
+			public void onStopTrackingTouch(SeekBar seekBar) {
+			}
+			
+			public void onStartTrackingTouch(SeekBar seekBar) {
+			}
+			
+			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+				if (fromUser == false) return;
+
+				movePosition(progress);
+			}
+		});
     	
     	this.mpPlayer.setOnInfoListener(new OnInfoListener() {
 			
@@ -91,6 +113,12 @@ public class SGPlayerActivity extends Activity {
 	protected void onDestroy() {
 		super.onDestroy();
 		Log.i("SGPA", "----> Destory");
+		try {
+			this.stop();
+			this.mpPlayer.release();
+		} catch (Exception e) {
+			Log.e("SGPA", e.getMessage());
+		}
 	}
 	
 	private void play() {
@@ -99,6 +127,7 @@ public class SGPlayerActivity extends Activity {
 			String mp3FileName = getFilesDir().getAbsolutePath();
 			mp3FileName += "/002.mp3";
 			
+			mpPlayer.reset();
 			mpPlayer.setDataSource(mp3FileName);
         	mpPlayer.prepare();
         	mpPlayer.setLooping(false);
@@ -113,10 +142,22 @@ public class SGPlayerActivity extends Activity {
 		}
 	}
 	
+	private void movePosition(int progress) {
+		//if (this.mpPlayer.isPlaying() == false) return;
+		try {
+			if (this.mpPlayer.getDuration() <= 0) return;
+			this.mpPlayer.seekTo(progress);
+			this.updateProgress();
+			
+		} catch (Exception e) {
+			Log.e("MP3", e.getMessage());
+		}
+	}
+	
 	private void stop() {
 		try{
         	mpPlayer.stop();
-        	mpPlayer.release();
+        	//mpPlayer.release();
         	
         	timer.stop();
 		} catch(Exception e){
@@ -126,13 +167,14 @@ public class SGPlayerActivity extends Activity {
 
     private void updateProgress(){
     	try {
-			//int max = this.mpPlayer.getDuration();
 			int current = this.mpPlayer.getCurrentPosition();
-			int progress = current; // * 100 / max;
+			this.sbProgress.setProgress(current);
 			
-			//Log.i("SGPA", "current --> " + current);
+			Calendar c = Calendar.getInstance();
+	        c.setTimeInMillis(current);
 			
-			this.sbProgress.setProgress(progress);
+	        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+	        this.tvProgressTime.setText(sdf.format(c.getTime()));
 		} catch (Exception e) {
 			Log.e("SGPA", e.getMessage());
 		}
