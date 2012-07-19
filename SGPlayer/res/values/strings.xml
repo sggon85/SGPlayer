@@ -3,5 +3,7 @@
 
     <string name="hello">Hello World, SGPlayerActivity!</string>
     <string name="app_name">SGPlayer</string>
+    <string name="play">Play</string>
+    <string name="stop">Stop</string>
 
 </resources>
