@@ -3,30 +3,170 @@
     android:id="@+id/m_llContainer"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
-
-    <Button
-        android:id="@+id/m_btnPlay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/play" />
-
-    <Button
-        android:id="@+id/m_btnStop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/stop" />
-
-    <SeekBar
-        android:id="@+id/m_sbProgress"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    android:orientation="vertical" android:padding="5dip">
 
     <TextView
-        android:id="@+id/m_tvProgressTime"
+        android:id="@+id/m_tvFileName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="00:00:00"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:text="File : "
+        android:textAppearance="?android:attr/textAppearanceMedium" android:paddingBottom="10dip" android:paddingTop="10dip"/>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:paddingBottom="5dip" android:paddingTop="5dip">
+
+        <TextView
+            android:id="@+id/m_tvProgressTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00:00:00"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    </LinearLayout>
+    
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:paddingBottom="2dip" android:paddingTop="2dip">
+
+        <SeekBar
+            android:id="@+id/m_sbProgress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" android:layout_marginBottom="5dip" android:layout_marginTop="5dip"/>
+
+    </LinearLayout>        
+
+    <LinearLayout
+        android:id="@+id/m_llMoveButtons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:padding="5dip" >
+
+        <TextView
+            android:id="@+id/m_minus5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="15dip"
+            android:text="-5"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/m_minus3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="15dip"
+            android:text="-3"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/m_minus1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="15dip"
+            android:text="-1"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/m_plus1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableBottom="@drawable/borderline"
+            android:text="+1"
+            android:textAppearance="?android:attr/textAppearanceMedium" android:paddingBottom="15dip" android:paddingTop="15dip" android:gravity="center_vertical|center_horizontal"/>
+
+        <TextView
+            android:id="@+id/m_plus3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="+3"
+            android:textAppearance="?android:attr/textAppearanceMedium" android:paddingBottom="15dip" android:paddingTop="15dip" android:gravity="center_vertical|center_horizontal"/>
+
+        <TextView
+            android:id="@+id/m_plus5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="+5"
+            android:textAppearance="?android:attr/textAppearanceMedium" android:paddingBottom="15dip" android:paddingTop="15dip" android:gravity="center_vertical|center_horizontal"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dip" >
+
+        <Button
+            android:id="@+id/m_btnPre"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Pre" />
+
+        <Button
+            android:id="@+id/m_btnPlay"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/play" />
+
+        <Button
+            android:id="@+id/m_btnPause"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Pause" />
+
+        <Button
+            android:id="@+id/m_btnStop"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/stop" />
+
+        <Button
+            android:id="@+id/m_btnNext"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Next" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/m_btnPrePoint"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Pre Point" />
+
+        <Button
+            android:id="@+id/m_btnSavePoint"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Save Point" />
+
+        <Button
+            android:id="@+id/m_btnNextPoint"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Next Point" />
+    </LinearLayout>
 
 </LinearLayout>
